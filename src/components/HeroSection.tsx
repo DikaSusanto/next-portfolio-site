@@ -1,5 +1,6 @@
 "use client"
 import React from 'react'
+import Image from 'next/image'
 
 const HeroSection: React.FC = () => {
   const scrollToSection = (id: string) => {
@@ -26,11 +27,14 @@ const HeroSection: React.FC = () => {
           <div className="mb-8 flex justify-center">
             <div className="relative">
               <div className="w-32 h-32 md:w-40 md:h-40 rounded-full bg-gradient-to-r from-blue-500 to-cyan-500 p-1">
-                <img
-                  src="https://media.licdn.com/dms/image/v2/D5603AQE1dAd66Mlw0w/profile-displayphoto-shrink_800_800/B56ZQsMhXOGoAc-/0/1735908268086?e=1756339200&v=beta&t=t0Zx-gtWrpFhOQHV3ZnIwozYdM01qpqFObUemMxFGPo"
-                  alt="Profile"
-                  className="w-full h-full rounded-full object-cover border-4 border-white/10"
-                />
+              <Image
+                src="https://media.licdn.com/dms/image/v2/D5603AQE1dAd66Mlw0w/profile-displayphoto-shrink_800_800/B56ZQsMhXOGoAc-/0/1735908268086?e=1756339200&v=beta&t=t0Zx-gtWrpFhOQHV3ZnIwozYdM01qpqFObUemMxFGPo"
+                alt="Profile"
+                width={160}
+                height={160}
+                className="w-full h-full rounded-full object-cover border-4 border-white/10"
+                priority
+              />
               </div>
               <div className="absolute -bottom-2 -right-2 w-8 h-8 bg-green-500 rounded-full border-4 border-gray-900"></div>
             </div>

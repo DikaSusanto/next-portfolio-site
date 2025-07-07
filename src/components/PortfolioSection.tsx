@@ -1,6 +1,7 @@
 "use client"
 import React, { useState } from 'react'
-import { projects as allProjects, Project } from '../data/projects'
+import { projects as allProjects } from '../data/projects'
+import Image from 'next/image'
 
 const categories = ['All', 'Web Development', 'Mobile Apps', 'UI/UX Design', 'E-commerce']
 
@@ -66,11 +67,13 @@ const PortfolioSection: React.FC = () => {
             >
               {/* Project Image */}
               <div className="relative overflow-hidden">
-                <img
-                  src={project.image}
-                  alt={project.title}
-                  className="w-full h-64 object-cover group-hover:scale-110 transition-transform duration-500"
-                />
+              <Image
+                src={project.image}
+                alt={project.title}
+                width={400}
+                height={256}
+                className="w-full h-64 object-cover group-hover:scale-110 transition-transform duration-500"
+              />
                 {/* Overlay on hover */}
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                   <div className="absolute bottom-4 left-4 right-4">

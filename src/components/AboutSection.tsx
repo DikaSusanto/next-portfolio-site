@@ -1,4 +1,5 @@
 import React from 'react'
+import Image from 'next/image'
 
 const skills = [
   'Laravel',
@@ -19,11 +20,14 @@ const AboutSection: React.FC = () => (
         {/* Left Column - Image */}
         <div className="relative">
           <div className="relative z-10">
-            <img
-              src="https://media.licdn.com/dms/image/v2/D5603AQE1dAd66Mlw0w/profile-displayphoto-shrink_800_800/B56ZQsMhXOGoAc-/0/1735908268086?e=1756339200&v=beta&t=t0Zx-gtWrpFhOQHV3ZnIwozYdM01qpqFObUemMxFGPo"
-              alt="About me"
-              className="rounded-2xl shadow-2xl w-full max-w-md mx-auto lg:mx-0"
-            />
+          <Image
+            src="https://media.licdn.com/dms/image/v2/D5603AQE1dAd66Mlw0w/profile-displayphoto-shrink_800_800/B56ZQsMhXOGoAc-/0/1735908268086?e=1756339200&v=beta&t=t0Zx-gtWrpFhOQHV3ZnIwozYdM01qpqFObUemMxFGPo"
+            alt="About me"
+            width={400}
+            height={400}
+            className="rounded-2xl shadow-2xl w-full max-w-md mx-auto lg:mx-0"
+            priority
+          />
             {/* Decorative elements */}
             <div className="absolute -top-6 -right-6 w-24 h-24 bg-blue-500 rounded-full opacity-20 blur-xl"></div>
             <div className="absolute -bottom-6 -left-6 w-32 h-32 bg-cyan-500 rounded-full opacity-20 blur-xl"></div>
