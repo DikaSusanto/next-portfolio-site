@@ -43,11 +43,10 @@ const AboutSection: React.FC = () => (
             </span>
           </h2>
           <p className="text-lg text-gray-300 mb-6 leading-relaxed text-justify">
-            Currently an Information Systems Management undergraduate at Bali State Polytechnic, passionate about
-            backend software development and building robust, scalable systems. My academic and internship experiences have given me hands-on skills in PHP, Laravel, MySQL, and related technologies.
+            Final-year Information System student at Bali State Polytechnic with a strong foundation in backend development and system design. Experienced in building and testing robust systems using PHP, Laravel, MySQL, and RESTful APIs, focusing on reliability and integration.
           </p>
           <p className="text-lg text-gray-300 mb-8 leading-relaxed text-justify">
-            I thrive in collaborative, diverse teams and am fluent in both English and Indonesian. Eager to keep growing as a web developer, I bring critical thinking, teamwork, and a drive for innovative solutions to every project.
+            Currently expanding into frontend and full-stack development to deliver seamless, user-friendly web experiences. I thrive in collaborative teams, enjoy solving problems, and am fluent in both English and Indonesian. Eager to contribute and grow as a versatile web developer.
           </p>
 
           {/* Skills */}
