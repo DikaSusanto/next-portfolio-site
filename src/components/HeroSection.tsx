@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
+import Image from 'next/image'
 
 const HeroSection = () => {
   const [currentRole, setCurrentRole] = useState(0)
@@ -100,9 +101,9 @@ const HeroSection = () => {
             ease: "easeInOut"
           }}
         >
-          <svg 
+          <svg
             className="w-full h-full drop-shadow-lg"
-            viewBox="0 0 144 144" 
+            viewBox="0 0 144 144"
           >
             <defs>
               {/* Moon gradient */}
@@ -112,7 +113,7 @@ const HeroSection = () => {
                 <stop offset="70%" stopColor="#cbd5e1" stopOpacity="0.6" />
                 <stop offset="100%" stopColor="#94a3b8" stopOpacity="0.4" />
               </radialGradient>
-              
+
               {/* Shadow gradient for crescent effect */}
               <radialGradient id="moonShadow" cx="0.8" cy="0.2" r="0.9">
                 <stop offset="0%" stopColor="#1e293b" stopOpacity="0.3" />
@@ -126,7 +127,7 @@ const HeroSection = () => {
                 <stop offset="70%" stopColor="#94a3b8" stopOpacity="0.2" />
                 <stop offset="100%" stopColor="transparent" stopOpacity="0" />
               </radialGradient>
-              
+
               <radialGradient id="crater2" cx="0.5" cy="0.5" r="0.6">
                 <stop offset="0%" stopColor="#475569" stopOpacity="0.3" />
                 <stop offset="100%" stopColor="transparent" stopOpacity="0" />
@@ -134,67 +135,67 @@ const HeroSection = () => {
 
               {/* Subtle glow around moon */}
               <filter id="moonGlow">
-                <feGaussianBlur stdDeviation="2" result="coloredBlur"/>
-                <feMerge> 
-                  <feMergeNode in="coloredBlur"/>
-                  <feMergeNode in="SourceGraphic"/>
+                <feGaussianBlur stdDeviation="2" result="coloredBlur" />
+                <feMerge>
+                  <feMergeNode in="coloredBlur" />
+                  <feMergeNode in="SourceGraphic" />
                 </feMerge>
               </filter>
             </defs>
-            
+
             {/* Moon glow */}
-            <circle 
-              cx="72" 
-              cy="72" 
-              r="76" 
-              fill="url(#moonGradient)" 
+            <circle
+              cx="72"
+              cy="72"
+              r="76"
+              fill="url(#moonGradient)"
               opacity="0.1"
               filter="url(#moonGlow)"
             />
-            
+
             {/* Main moon body */}
-            <circle 
-              cx="72" 
-              cy="72" 
-              r="68" 
+            <circle
+              cx="72"
+              cy="72"
+              r="68"
               fill="url(#moonGradient)"
               filter="url(#moonGlow)"
             />
-            
+
             {/* Large crater */}
-            <circle 
-              cx="58" 
-              cy="48" 
-              r="12" 
+            <circle
+              cx="58"
+              cy="48"
+              r="12"
               fill="url(#crater1)"
             />
-            
+
             {/* Medium crater */}
-            <circle 
-              cx="85" 
-              cy="65" 
-              r="8" 
+            <circle
+              cx="85"
+              cy="65"
+              r="8"
               fill="url(#crater2)"
             />
-            
+
             {/* Small craters */}
             <circle cx="45" cy="75" r="4" fill="url(#crater2)" opacity="0.6" />
             <circle cx="92" cy="45" r="3" fill="url(#crater1)" opacity="0.5" />
             <circle cx="68" cy="85" r="5" fill="url(#crater2)" opacity="0.4" />
             <circle cx="35" cy="55" r="2" fill="url(#crater1)" opacity="0.7" />
-            
+
             {/* Surface details - subtle texture */}
             <circle cx="75" cy="55" r="1.5" fill="#94a3b8" opacity="0.3" />
             <circle cx="52" cy="68" r="1" fill="#64748b" opacity="0.4" />
             <circle cx="88" cy="78" r="1.5" fill="#94a3b8" opacity="0.2" />
             <circle cx="42" cy="42" r="1" fill="#64748b" opacity="0.3" />
             <circle cx="78" cy="38" r="0.8" fill="#94a3b8" opacity="0.5" />
-            
+
             {/* Subtle shadow overlay for 3D effect */}
-            <circle 
-              cx="72" 
-              cy="72" 
-              r="68" 
+            <circle
+              cx="72"
+              cy="72"
+              r="68"
               fill="url(#moonShadow)"
             />
           </svg>
@@ -311,14 +312,17 @@ const HeroSection = () => {
                 whileHover={{ scale: 1.03 }}
                 transition={{ type: "spring", stiffness: 300 }}
               >
-                <img
-                  src="img/pfp-2.jpg"
+                <Image
+                  src="/img/pfp-2.jpg"
                   alt="Profile"
+                  width={160}
+                  height={160}
                   className="w-full h-full rounded-full object-cover object-center border-2 sm:border-4 border-white/10"
-                  style={{ 
+                  style={{
                     objectPosition: 'center 20%',
                     transform: 'scale(1.2)'
                   }}
+                  priority
                 />
               </motion.div>
               <motion.div
@@ -346,7 +350,7 @@ const HeroSection = () => {
               animate={{ opacity: 1, x: 0 }}
               transition={{ delay: 0.8, duration: 0.8 }}
             >
-              Hi, I'm{' '}
+              Hi, I&apos;m{' '}
             </motion.span>
             <motion.span
               className="bg-gradient-to-r from-blue-400 via-cyan-400 to-blue-500 bg-clip-text text-transparent inline-block"
@@ -391,7 +395,7 @@ const HeroSection = () => {
             variants={itemVariants}
           >
             I specialize in backend development with PHP, Laravel, and MySQL.
-            I'm also expanding into frontend and web development to create seamless user experiences.
+            I&apos;m also expanding into frontend and web development to create seamless user experiences.
           </motion.p>
 
           {/* CTA Buttons - Mobile optimized layout */}

@@ -283,7 +283,7 @@ const Navbar = () => {
                   transition={{ delay: 0.6 }}
                   whileTap={{ scale: 0.98 }}
                 >
-                  Let's Work Together
+                  Let&apos;s Work Together
                 </motion.button>
               </div>
 

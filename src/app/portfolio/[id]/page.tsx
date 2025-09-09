@@ -3,12 +3,6 @@ import { projects } from '../../../data/projects'
 import ProjectDetailPage from '../../../components/ProjectDetailPage'
 import type { Metadata } from 'next'
 
-interface ProjectPageProps {
-  params: {
-    id: string
-  }
-}
-
 // Get site URL from env or fallback
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000'
 
