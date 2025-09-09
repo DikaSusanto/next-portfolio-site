@@ -1,6 +1,7 @@
 import './globals.css'
 import type { Metadata } from 'next'
-import { Analytics } from '@vercel/analytics/react' // <-- Add this import
+import { Analytics } from '@vercel/analytics/react'
+import Navbar from '../components/Navbar'
 
 export const metadata: Metadata = {
   title: 'Dika Putra Susanto | Portfolio',
@@ -14,7 +15,11 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
+      <head>
+        <link rel="icon" href="/img/Personal-Logo-2.png" type="image/x-icon" />
+      </head>
       <body className="bg-gray-900 text-white antialiased">
+        <Navbar /> 
         {children}
         <Analytics />
       </body>
