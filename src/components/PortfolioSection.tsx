@@ -7,6 +7,7 @@ import { projects as allProjects } from '../data/projects'
 import Image from 'next/image'
 import Link from 'next/link'
 import { motion } from 'framer-motion'
+import DynamicBackground from './DynamicBackground'
 
 const categories = ['All', 'Web Development', 'Mobile Apps', 'UI/UX Design', 'E-commerce']
 
@@ -38,6 +39,7 @@ const PortfolioSection: React.FC = () => {
 
   return (
     <section id="portfolio" className="py-20 bg-gray-900 relative overflow-hidden">
+      <DynamicBackground />
       {/* Decorative Background Elements */}
       <div className="absolute inset-0 pointer-events-none">
         <div className="absolute top-20 left-10 w-32 h-32 bg-gray-600/10 rounded-full blur-xl"></div>
@@ -94,10 +96,39 @@ const PortfolioSection: React.FC = () => {
         {/* Portfolio Grid */}
         <div className={`${gridClasses} gap-8`}>
           {displayedProjects.map(project => (
-            <div
+            <motion.div
               key={project.id}
-              className="group relative bg-gray-800 rounded-2xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2"
+              className="group relative bg-gray-800 rounded-2xl shadow-lg overflow-hidden hover:shadow-2xl 
+             transition-all duration-500 transform hover:-translate-y-2 border border-gray-700/50
+             will-change-transform [backface-visibility:hidden] [transform:translateZ(0)]"
+              whileHover={{
+                scale: 1.02,
+                rotateY: 5,
+                rotateX: 5,
+                z: 50
+              }}
+              transition={{ type: "spring", stiffness: 200, damping: 20 }}
+              layout
             >
+              {/* Animated border hover effect */}
+              <motion.div
+                className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
+                style={{
+                  background: `conic-gradient(from 0deg, 
+        rgba(59, 130, 246, 0) 0deg,
+        rgba(6, 182, 212, 0.4) 90deg,
+        rgba(139, 92, 246, 0.4) 180deg,
+        rgba(59, 130, 246, 0.4) 270deg,
+        rgba(59, 130, 246, 0) 360deg)`,
+                  padding: '2px',
+                  mask: 'linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)',
+                  maskComposite: 'exclude',
+                  WebkitMaskComposite: 'xor'
+                }}
+                animate={{ rotate: [0, 360] }}
+                transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
+              />
+
               {/* Project Image */}
               <div className="relative overflow-hidden rounded-t-2xl">
                 <Image
@@ -115,7 +146,8 @@ const PortfolioSection: React.FC = () => {
                         <span
                           key={tech}
                           style={{ transitionDelay: `${i * 100}ms` }}
-                          className="opacity-0 group-hover:opacity-100 transition-opacity duration-500 px-2 py-1 bg-white/20 backdrop-blur-sm text-white text-xs rounded-full"
+                          className="opacity-0 group-hover:opacity-100 transition-opacity duration-500 px-2 py-1 
+                         bg-white/10 text-white text-xs rounded-full"
                         >
                           {tech}
                         </span>
@@ -143,7 +175,7 @@ const PortfolioSection: React.FC = () => {
               </div>
 
               {/* Project Content */}
-              <div className="p-6">
+              <div className="p-6 relative z-10">
                 <h3 className="text-xl font-bold text-white mb-3 group-hover:text-blue-300 transition-colors duration-300 leading-tight">
                   {project.title}
                 </h3>
@@ -151,7 +183,7 @@ const PortfolioSection: React.FC = () => {
                   {project.description}
                 </p>
 
-                {/* Duration Only */}
+                {/* Duration */}
                 <div className="flex items-center mb-6">
                   <div className="flex items-center space-x-2 text-sm text-gray-400">
                     <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -188,10 +220,7 @@ const PortfolioSection: React.FC = () => {
                   </Link>
                 </div>
               </div>
-
-              {/* Hover Effect Gradient */}
-              <div className="absolute inset-0 bg-gradient-to-r from-blue-600/5 to-cyan-600/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none rounded-2xl"></div>
-            </div>
+            </motion.div>
           ))}
         </div>
 

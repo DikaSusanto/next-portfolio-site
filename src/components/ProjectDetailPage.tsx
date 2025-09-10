@@ -19,16 +19,6 @@ const ProjectDetailPage: React.FC<ProjectDetailPageProps> = ({ project }) => {
     { left: string; top: string; size: string; color: string; duration: number; delay: number }[]
   >([])
 
-  // Format duration to month/year format
-  const formatDuration = (duration: string) => {
-    const monthsMap: { [key: string]: string } = {
-      '1 month': 'June 2024',
-      '3 months': 'April 2024 - June 2024',
-      '2 months': 'May 2024 - June 2024'
-    }
-    return monthsMap[duration] || duration
-  }
-
   useEffect(() => {
     // Generate particles similar to HeroSection
     const particleCount = window.innerWidth < 768 ? 12 : 20
@@ -69,8 +59,8 @@ const ProjectDetailPage: React.FC<ProjectDetailPageProps> = ({ project }) => {
   } as const
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-black relative overflow-hidden">
-      {/* Enhanced Background - More like HeroSection */}
+    <div className="min-h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-black relative overflow-hidden pt-20">
+      {/* Enhanced Background */}
       <div className="absolute inset-0 pointer-events-none">
         {/* Gradient overlays */}
         <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-r from-blue-500/5 to-cyan-500/5"></div>
@@ -391,13 +381,13 @@ const ProjectDetailPage: React.FC<ProjectDetailPageProps> = ({ project }) => {
                   </svg>
                 </motion.div>
                 <div>
-                  <div className="text-lg font-semibold text-white">{formatDuration(project.duration)}</div>
+                  <div className="text-lg font-semibold text-white">{project.duration}</div>
                   <div className="text-sm text-gray-400">Development Period</div>
                 </div>
               </motion.div>
 
               <motion.p 
-                className="text-gray-300 leading-relaxed mb-6"
+                className="text-gray-300 leading-relaxed mb-6 text-justify"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ delay: 0.6 }}
