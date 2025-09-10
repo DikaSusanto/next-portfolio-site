@@ -1,5 +1,6 @@
 "use client"
 import React, { useState } from 'react'
+import { motion } from 'framer-motion'
 
 interface ContactForm {
   name: string
@@ -254,9 +255,34 @@ const ContactSection: React.FC = () => {
               )}
 
               <div className="relative">
-                {/* Decorative elements */}
-                <div className="absolute -top-6 -right-6 w-24 h-24 bg-blue-500/10 rounded-full blur-xl"></div>
-                <div className="absolute -bottom-6 -left-6 w-32 h-32 bg-cyan-500/10 rounded-full blur-xl"></div>
+                {/* Decorative elements with breathing animation */}
+                <motion.div 
+                  className="absolute -top-6 -right-6 w-24 h-24 bg-blue-500/20 rounded-full blur-xl"
+                  animate={{
+                    scale: [1, 1.3, 1],
+                    opacity: [0.4, 0.8, 0.4],
+                    rotate: [0, 360, 0]
+                  }}
+                  transition={{
+                    duration: 4,
+                    repeat: Infinity,
+                    ease: "easeInOut"
+                  }}
+                />
+                <motion.div 
+                  className="absolute -bottom-6 -left-6 w-32 h-32 bg-cyan-500/20 rounded-full blur-xl"
+                  animate={{
+                    scale: [1, 1.4, 1],
+                    opacity: [0.3, 0.7, 0.3],
+                    rotate: [360, 0, 360]
+                  }}
+                  transition={{
+                    duration: 5,
+                    repeat: Infinity,
+                    ease: "easeInOut",
+                    delay: 1.5
+                  }}
+                />
 
                 <div className="relative bg-gray-800 p-8 rounded-2xl shadow-xl border border-gray-700">
                   <h3 className="text-2xl font-bold text-white mb-6">Send me a message</h3>

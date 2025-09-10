@@ -1,5 +1,6 @@
 "use client"
 import React from 'react'
+import DynamicBackground from './DynamicBackground'
 
 const FooterSection: React.FC = () => {
   const currentYear = new Date().getFullYear()
@@ -32,6 +33,7 @@ const FooterSection: React.FC = () => {
 
   return (
     <footer className="bg-gray-900 text-white relative">
+      <DynamicBackground particleCount={8} blobCount={3} />
       <div className="container mx-auto px-6 py-12 relative z-10">
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
           {/* Logo and Description */}
