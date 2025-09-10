@@ -126,8 +126,8 @@ const ContactSection: React.FC = () => {
   }
 
   return (
-    <section id="contact" className="py-20 bg-gray-900">
-      <div className="container mx-auto px-6">
+    <section id="contact" className="py-20 bg-gray-900 relative">
+      <div className="container mx-auto px-6 relative z-10">
         <div className="max-w-6xl mx-auto">
           {/* Section Header */}
           <div className="text-center mb-16">
@@ -255,34 +255,86 @@ const ContactSection: React.FC = () => {
               )}
 
               <div className="relative">
-                {/* Decorative elements with breathing animation */}
-                <motion.div 
-                  className="absolute -top-6 -right-6 w-24 h-24 bg-blue-500/20 rounded-full blur-xl"
-                  animate={{
-                    scale: [1, 1.3, 1],
-                    opacity: [0.4, 0.8, 0.4],
-                    rotate: [0, 360, 0]
-                  }}
-                  transition={{
-                    duration: 4,
-                    repeat: Infinity,
-                    ease: "easeInOut"
-                  }}
-                />
-                <motion.div 
-                  className="absolute -bottom-6 -left-6 w-32 h-32 bg-cyan-500/20 rounded-full blur-xl"
-                  animate={{
-                    scale: [1, 1.4, 1],
-                    opacity: [0.3, 0.7, 0.3],
-                    rotate: [360, 0, 360]
-                  }}
-                  transition={{
-                    duration: 5,
-                    repeat: Infinity,
-                    ease: "easeInOut",
-                    delay: 1.5
-                  }}
-                />
+                {/* Decorative elements with breathing animation - optimized to prevent layout shifts */}
+                <div className="absolute inset-0 pointer-events-none overflow-hidden">
+                  <motion.div 
+                    className="absolute -top-6 -right-6 w-24 h-24 bg-blue-500/20 rounded-full blur-xl"
+                    animate={{
+                      scale: [1, 1.3, 1],
+                      opacity: [0.4, 0.8, 0.4],
+                      rotate: [0, 360, 0]
+                    }}
+                    transition={{
+                      duration: 4,
+                      repeat: Infinity,
+                      ease: "easeInOut"
+                    }}
+                    style={{
+                      willChange: 'transform',
+                      transform: 'translateZ(0)',
+                      backfaceVisibility: 'hidden'
+                    }}
+                  />
+                  <motion.div 
+                    className="absolute -bottom-6 -left-6 w-32 h-32 bg-cyan-500/20 rounded-full blur-xl"
+                    animate={{
+                      scale: [1, 1.4, 1],
+                      opacity: [0.3, 0.7, 0.3],
+                      rotate: [360, 0, 360]
+                    }}
+                    transition={{
+                      duration: 5,
+                      repeat: Infinity,
+                      ease: "easeInOut",
+                      delay: 1.5
+                    }}
+                    style={{
+                      willChange: 'transform',
+                      transform: 'translateZ(0)',
+                      backfaceVisibility: 'hidden'
+                    }}
+                  />
+                  {/* New purple blob top-left */}
+                  <motion.div
+                    className="absolute -top-8 -left-8 w-16 h-16 bg-purple-500/20 rounded-full blur-2xl"
+                    animate={{
+                      scale: [1, 1.2, 1],
+                      opacity: [0.3, 0.6, 0.3],
+                      rotate: [0, 180, 0]
+                    }}
+                    transition={{
+                      duration: 4.5,
+                      repeat: Infinity,
+                      ease: "easeInOut",
+                      delay: 0.7
+                    }}
+                    style={{
+                      willChange: 'transform',
+                      transform: 'translateZ(0)',
+                      backfaceVisibility: 'hidden'
+                    }}
+                  />
+                  {/* New blue blob bottom-right */}
+                  <motion.div
+                    className="absolute -bottom-10 -right-10 w-28 h-28 bg-blue-400/20 rounded-full blur-2xl"
+                    animate={{
+                      scale: [1, 1.25, 1],
+                      opacity: [0.2, 0.5, 0.2],
+                      rotate: [0, 270, 0]
+                    }}
+                    transition={{
+                      duration: 6,
+                      repeat: Infinity,
+                      ease: "easeInOut",
+                      delay: 2
+                    }}
+                    style={{
+                      willChange: 'transform',
+                      transform: 'translateZ(0)',
+                      backfaceVisibility: 'hidden'
+                    }}
+                  />
+                </div>
 
                 <div className="relative bg-gray-800 p-8 rounded-2xl shadow-xl border border-gray-700">
                   <h3 className="text-2xl font-bold text-white mb-6">Send me a message</h3>

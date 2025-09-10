@@ -29,15 +29,14 @@ const Navbar = () => {
     }
   }, [pathname])
 
-  // Track scroll position for navbar background and active section (only on home)
+  // Track scroll position for navbar background and active section
   useEffect(() => {
-    if (pathname !== '/') return
-
     const handleScroll = () => {
       const isScrolled = window.scrollY > 50
       setScrolled(isScrolled)
 
-      if (!isNavigating) {
+      // Only do active section logic on home page
+      if (pathname === '/' && !isNavigating) {
         const sections = ['dashboard', 'about', 'portfolio', 'contact']
         const scrollPosition = window.scrollY + 100
 
@@ -54,8 +53,18 @@ const Navbar = () => {
       }
     }
 
-    window.addEventListener('scroll', handleScroll)
-    return () => window.removeEventListener('scroll', handleScroll)
+    // Use requestAnimationFrame to throttle scroll events
+    let ticking = false
+    const optimizedScrollHandler = () => {
+      if (!ticking) {
+        requestAnimationFrame(handleScroll)
+        ticking = true
+        setTimeout(() => { ticking = false }, 16) // ~60fps
+      }
+    }
+
+    window.addEventListener('scroll', optimizedScrollHandler, { passive: true })
+    return () => window.removeEventListener('scroll', optimizedScrollHandler)
   }, [isNavigating, pathname])
 
   // Prevent scroll when mobile menu is open
@@ -119,6 +128,11 @@ const Navbar = () => {
             ? 'bg-gray-900/90 backdrop-blur-md border-white/10'
             : 'bg-transparent border-transparent'
         }`}
+        style={{
+          willChange: 'auto',
+          transform: 'translateZ(0)',
+          backfaceVisibility: 'hidden'
+        }}
       >
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16 lg:h-20">
