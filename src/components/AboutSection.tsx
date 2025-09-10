@@ -247,7 +247,7 @@ const AboutSection: React.FC = () => {
                 onHoverEnd={() => setHovered(false)}
               >
                 <Image
-                  src="https://media.licdn.com/dms/image/v2/D5603AQE1dAd66Mlw0w/profile-displayphoto-shrink_800_800/B56ZQsMhXOGoAc-/0/1735908268086?e=1756339200&v=beta&t=t0Zx-gtWrpFhOQHV3ZnIwozYdM01qpqFObUemMxFGPo"
+                  src="/img/PFP-3.jpg"
                   alt="About me"
                   width={400}
                   height={400}
