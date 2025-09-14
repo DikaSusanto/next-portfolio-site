@@ -21,9 +21,10 @@ const Navbar = () => {
       // Scroll-based logic (handled below)
       return
     }
-    // If on /portfolio or /portfolio/[id], highlight Portfolio
     if (pathname.startsWith('/portfolio')) {
       setActiveSection('portfolio')
+    } else if (pathname.startsWith('/about')) {
+      setActiveSection('about')
     } else {
       setActiveSection('')
     }
@@ -123,11 +124,10 @@ const Navbar = () => {
         initial={{ y: -100, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.6, ease: "easeOut" }}
-        className={`fixed w-full top-0 z-50 transition-all duration-300 border-b ${
-          scrolled
+        className={`fixed w-full top-0 z-50 transition-all duration-300 border-b ${scrolled
             ? 'bg-gray-900/90 backdrop-blur-md border-white/10'
             : 'bg-transparent border-transparent'
-        }`}
+          }`}
         style={{
           willChange: 'auto',
           transform: 'translateZ(0)',
@@ -161,11 +161,10 @@ const Navbar = () => {
                   <motion.button
                     key={item.id}
                     onClick={() => scrollToSection(item.id)}
-                    className={`relative px-4 lg:px-6 py-2 lg:py-3 rounded-full text-sm lg:text-base font-medium transition-all duration-300 ${
-                      activeSection === item.id
+                    className={`relative px-4 lg:px-6 py-2 lg:py-3 rounded-full text-sm lg:text-base font-medium transition-all duration-300 ${activeSection === item.id
                         ? 'text-white bg-gradient-to-r from-blue-500 to-cyan-500 shadow-lg'
                         : 'text-gray-300 hover:text-white hover:bg-white/10'
-                    }`}
+                      }`}
                     initial={{ opacity: 0, y: -20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.1 * index }}
@@ -183,7 +182,7 @@ const Navbar = () => {
                         initial={isNavigating ? { scale: 0, opacity: 0 } : false}
                         animate={isNavigating ? { scale: 1, opacity: 1 } : {}}
                         transition={
-                          isNavigating 
+                          isNavigating
                             ? { type: "spring", stiffness: 400, damping: 25, duration: 0.2 }
                             : { type: "spring", stiffness: 300, damping: 30 }
                         }
@@ -259,22 +258,20 @@ const Navbar = () => {
                   <motion.button
                     key={item.id}
                     onClick={() => scrollToSection(item.id)}
-                    className={`w-full flex items-center gap-4 p-4 text-left rounded-xl transition-all duration-200 group ${
-                      activeSection === item.id
+                    className={`w-full flex items-center gap-4 p-4 text-left rounded-xl transition-all duration-200 group ${activeSection === item.id
                         ? 'bg-gradient-to-r from-blue-500/20 to-cyan-500/20 text-white border border-blue-500/30'
                         : 'text-gray-300 hover:text-white hover:bg-white/5'
-                    }`}
+                      }`}
                     initial={{ x: 50, opacity: 0 }}
                     animate={{ x: 0, opacity: 1 }}
                     transition={{ delay: 0.1 * index }}
                     whileHover={{ x: 5 }}
                     whileTap={{ scale: 0.98 }}
                   >
-                    <div className={`p-2 rounded-lg transition-colors ${
-                      activeSection === item.id
+                    <div className={`p-2 rounded-lg transition-colors ${activeSection === item.id
                         ? 'bg-gradient-to-r from-blue-500 to-cyan-500'
                         : 'bg-gray-700/50 group-hover:bg-gray-700'
-                    }`}>
+                      }`}>
                       <item.icon className="text-xl" />
                     </div>
                     <div>

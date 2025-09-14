@@ -489,12 +489,11 @@ const AboutSection: React.FC = () => {
               ))}
             </motion.div>
 
-            {/* CTA Button - Responsive */}
-            <div className="flex justify-center lg:justify-start">
+            {/* CTA Buttons - Responsive */}
+            <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center lg:justify-start">
               <motion.a
-                href="/cv/CV_Dika Putra Susanto_2025.pdf"
-                download
-                className="bg-gradient-to-r from-blue-600 to-cyan-600 hover:from-blue-500 hover:to-cyan-500 text-white px-6 py-2 sm:px-8 sm:py-3 rounded-full font-semibold transition-all duration-300 shadow-lg inline-block relative overflow-hidden group text-sm sm:text-base"
+                href="/about"
+                className="bg-gradient-to-r from-blue-600 to-cyan-600 hover:from-blue-500 hover:to-cyan-500 text-white px-6 py-2 sm:px-8 sm:py-3 rounded-full font-semibold transition-all duration-300 shadow-lg inline-block relative overflow-hidden group text-sm sm:text-base text-center"
                 whileHover={{
                   scale: 1.05,
                   boxShadow: "0 10px 40px rgba(59, 130, 246, 0.4)"
@@ -504,8 +503,22 @@ const AboutSection: React.FC = () => {
               >
                 <motion.span
                   className="absolute inset-0 bg-gradient-to-r from-cyan-600 to-blue-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-                  layoutId="download-bg"
+                  layoutId="learn-more-bg"
                 />
+                <span className="relative z-10">Learn More About Me</span>
+              </motion.a>
+
+              <motion.a
+                href="/cv/CV_Dika Putra Susanto_2025.pdf"
+                download
+                className="border border-blue-500 text-blue-400 hover:bg-blue-500 hover:text-white px-6 py-2 sm:px-8 sm:py-3 rounded-full font-semibold transition-all duration-300 shadow-lg inline-block relative overflow-hidden group text-sm sm:text-base text-center"
+                whileHover={{
+                  scale: 1.05,
+                  boxShadow: "0 10px 40px rgba(59, 130, 246, 0.3)"
+                }}
+                whileTap={{ scale: 0.95 }}
+                transition={{ type: "spring", stiffness: 300 }}
+              >
                 <span className="relative z-10">Download Resume</span>
               </motion.a>
             </div>
