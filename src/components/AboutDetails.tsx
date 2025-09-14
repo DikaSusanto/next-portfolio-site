@@ -22,8 +22,8 @@ const personalInfo = {
   title: "Final-year Information System Student | Backend & Full-Stack Developer",
   whoAmI: "Final-year Information System student at Bali State Polytechnic with a strong foundation in backend development and system design. Through academic and internship projects, I've built and tested robust systems using PHP, Laravel, MySQL, and REST APIs — with a focus on reliability, maintainability, and integration. Currently expanding into frontend and full-stack development using React, Next.js, and Tailwind CSS to create seamless, user-friendly experiences. I thrive in collaborative teams, enjoy problem-solving through critical thinking, and am eager to contribute as a versatile and adaptive developer.",
   images: [
-    "/img/PFP-1.jpg",
-    "/img/PFP-2.jpg",
+    "/img/PFP-1.JPG",
+    "/img/pfp-2.jpg",
     "/img/PFP-3.jpg"
   ],
   location: "Bali, Indonesia",
