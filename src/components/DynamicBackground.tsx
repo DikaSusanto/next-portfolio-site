@@ -1,7 +1,7 @@
 // src/components/DynamicBackground.tsx
 "use client"
 
-import React, { useEffect, useState } from "react"
+import React, { useEffect, useState, useMemo } from "react"
 import { motion } from "framer-motion"
 
 interface Blob {
@@ -31,6 +31,12 @@ const DynamicBackground: React.FC<DynamicBackgroundProps> = ({
     { left: string; top: string; duration: number; delay: number }[]
   >([])
 
+  // Extract the serialization to a separate variable for static checking
+  const blobColorsString = JSON.stringify(blobColors)
+  
+  // Memoize the blobColors array to prevent infinite re-renders
+  const stableBlobColors = useMemo(() => blobColors, [blobColorsString])
+
   useEffect(() => {
     // Generate particles
     const count = typeof window !== "undefined" && window.innerWidth < 768 ? Math.min(particleCount, 15) : particleCount
@@ -48,12 +54,12 @@ const DynamicBackground: React.FC<DynamicBackgroundProps> = ({
       left: `${Math.random() * 100}%`,
       top: `${Math.random() * 100}%`,
       size: 120 + Math.random() * 200, // 120px – 320px
-      color: blobColors[Math.floor(Math.random() * blobColors.length)],
+      color: stableBlobColors[Math.floor(Math.random() * stableBlobColors.length)],
       duration: 6 + Math.random() * 4,
       delay: Math.random() * 4,
     }))
     setBlobs(blobConfigs)
-  }, [particleCount, blobCount])
+  }, [particleCount, blobCount, stableBlobColors])
 
   return (
     <div className="absolute inset-0 overflow-hidden">
@@ -61,12 +67,12 @@ const DynamicBackground: React.FC<DynamicBackgroundProps> = ({
       {particles.map((pos, i) => (
         <motion.div
           key={`particle-${i}`}
-          className={`absolute w-1 h-1 sm:w-1.5 sm:h-1.5 ${particleColor} rounded-full opacity-70`}
+          className={`absolute w-0.5 h-0.5 sm:w-1 sm:h-1 ${particleColor} rounded-full opacity-60`}
           style={{ left: pos.left, top: pos.top }}
           animate={{
             y: [-20, 20, -20],
-            opacity: [0.3, 0.9, 0.3],
-            scale: [0.6, 1.2, 0.6],
+            opacity: [0.3, 0.8, 0.3],
+            scale: [0.5, 1, 0.5],
           }}
           transition={{
             duration: pos.duration,

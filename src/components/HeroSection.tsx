@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import Image from 'next/image'
+import DynamicBackground from './DynamicBackground'
 
 const HeroSection = () => {
   const [currentRole, setCurrentRole] = useState(0)
@@ -25,22 +26,6 @@ const HeroSection = () => {
     const el = document.getElementById(id)
     if (el) el.scrollIntoView({ behavior: 'smooth' })
   }
-
-  // Particle logic with SSR-safe responsive count
-  const [particlePositions, setParticlePositions] = useState<
-    { left: string; top: string; duration: number; delay: number }[]
-  >([])
-
-  useEffect(() => {
-    const count = typeof window !== "undefined" && window.innerWidth < 768 ? 8 : 15
-    const positions = Array.from({ length: count }, () => ({
-      left: `${Math.random() * 100}%`,
-      top: `${Math.random() * 100}%`,
-      duration: 3 + Math.random() * 2,
-      delay: Math.random() * 2,
-    }))
-    setParticlePositions(positions)
-  }, [])
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -85,6 +70,13 @@ const HeroSection = () => {
       id="dashboard"
       className="min-h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-black flex flex-col items-center justify-center relative overflow-hidden pt-20 lg:pt-24"
     >
+      <DynamicBackground
+        particleCount={15}
+        blobCount={3}
+        blobColors={["bg-blue-500/30", "bg-cyan-500/30"]}
+        particleColor="bg-blue-400"
+      />
+
       {/* Animated Moon Background */}
       <div className="absolute inset-0 overflow-hidden">
         {/* Realistic Moon */}
@@ -201,7 +193,7 @@ const HeroSection = () => {
           </svg>
         </motion.div>
 
-        {/* Improved Mountain/Hill Silhouette with better coverage */}
+        {/* Mountain/Hill Silhouette */}
         <div className="absolute bottom-0 left-0 w-full h-32 sm:h-40 md:h-48 bg-gradient-to-t from-gray-900 to-transparent">
           <svg
             className="absolute bottom-0 w-full h-full"
@@ -210,7 +202,7 @@ const HeroSection = () => {
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
           >
-            {/* Multiple mountain layers for better coverage */}
+            {/* Multiple mountain layers */}
             <path
               d="M-100 300V200C100 150 300 180 500 160C700 140 900 170 1100 150C1300 130 1500 160 1700 140C1900 120 2000 150 2100 130V300H-100Z"
               fill="url(#mountainGradient1)"
@@ -242,30 +234,7 @@ const HeroSection = () => {
           </svg>
         </div>
 
-        {/* Floating Particles - SSR safe */}
-        {particlePositions.map((pos, i) => (
-          <motion.div
-            key={i}
-            className="absolute w-0.5 h-0.5 sm:w-1 sm:h-1 bg-blue-400 rounded-full opacity-60"
-            style={{
-              left: pos.left,
-              top: pos.top,
-            }}
-            animate={{
-              y: [-20, 20, -20],
-              opacity: [0.3, 0.8, 0.3],
-              scale: [0.5, 1, 0.5]
-            }}
-            transition={{
-              duration: pos.duration,
-              repeat: Infinity,
-              delay: pos.delay,
-              ease: "easeInOut"
-            }}
-          />
-        ))}
-
-        {/* Gradient Overlays - Mobile optimized */}
+        {/* Gradient Overlays */}
         <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-r from-blue-500/5 to-cyan-500/5"></div>
         <motion.div
           className="absolute top-12 left-4 sm:top-20 sm:left-10 w-24 h-24 sm:w-32 sm:h-32 bg-blue-500/10 rounded-full blur-xl"
@@ -291,7 +260,7 @@ const HeroSection = () => {
         animate="visible"
       >
         <div className="text-center max-w-5xl mx-auto">
-          {/* Profile Image with mobile-optimized sizing */}
+          {/* Profile Image */}
           <motion.div
             className="mb-6 sm:mb-8 flex justify-center"
             variants={itemVariants}
@@ -340,7 +309,7 @@ const HeroSection = () => {
             </motion.div>
           </motion.div>
 
-          {/* Main Content with responsive typography */}
+          {/* Main Content */}
           <motion.h1
             className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl 2xl:text-7xl font-bold text-white mb-4 sm:mb-6 leading-tight px-2"
             variants={nameVariants}
@@ -371,7 +340,7 @@ const HeroSection = () => {
             </motion.span>
           </motion.h1>
 
-          {/* Dynamic Role with responsive text */}
+          {/* Dynamic Role */}
           <motion.div
             className="text-base sm:text-lg md:text-xl lg:text-2xl text-gray-300 mb-3 sm:mb-4 max-w-3xl mx-auto h-6 sm:h-8 px-2"
             variants={itemVariants}
@@ -398,7 +367,7 @@ const HeroSection = () => {
             I&apos;m also expanding into frontend and web development to create seamless user experiences.
           </motion.p>
 
-          {/* CTA Buttons - Mobile optimized layout */}
+          {/* CTA Buttons */}
           <motion.div
             className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center items-center mb-6 sm:mb-8 px-4"
             variants={itemVariants}
@@ -436,7 +405,7 @@ const HeroSection = () => {
             </motion.button>
           </motion.div>
 
-          {/* Social Links - Mobile optimized */}
+          {/* Social Links */}
           <motion.div
             className="flex justify-center space-x-4 sm:space-x-6"
             variants={itemVariants}
