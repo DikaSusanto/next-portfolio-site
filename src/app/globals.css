@@ -19,3 +19,14 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+/* Prevent flash of unstyled content during loading */
+body:not(.loaded) * {
+  animation-play-state: paused !important;
+  transition: none !important;
+}
+
+/* Smooth transition when content appears */
+.content-transition {
+  transition: opacity 0.3s ease-in-out;
+}
