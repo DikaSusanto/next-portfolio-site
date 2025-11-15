@@ -19,8 +19,8 @@ import {
 
 const personalInfo = {
   name: "Dika Putra Susanto",
-  title: "Final-year Information System Student | Backend & Full-Stack Developer",
-  whoAmI: "Final-year Information System student at Bali State Polytechnic with a strong foundation in backend development and system design. Through academic and internship projects, I've built and tested robust systems using PHP, Laravel, MySQL, and REST APIs — with a focus on reliability, maintainability, and integration. Currently expanding into frontend and full-stack development using React, Next.js, and Tailwind CSS to create seamless, user-friendly experiences. I thrive in collaborative teams, enjoy problem-solving through critical thinking, and am eager to contribute as a versatile and adaptive developer.",
+  title: "Information Management Graduate | Backend & Full-Stack Developer",
+  whoAmI: "Graduate in Information Management at Bali State Polytechnic with a strong foundation in software development and a broad interest in technology. Through academic and internship projects, I've built and tested robust systems using PHP, Laravel, MySQL, and REST APIs — with a focus on reliability, maintainability, and integration. Currently expanding into frontend and full-stack development using React, Next.js, and Tailwind CSS to create seamless, user-friendly experiences. I thrive in collaborative teams, enjoy problem-solving through critical thinking, and am eager to contribute as a versatile and adaptive developer.",
   images: [
     "/img/PFP-1.JPG",
     "/img/pfp-2.jpg",
@@ -33,9 +33,9 @@ const personalInfo = {
 
 const education = {
   degree: "Associate Degree (D3) in Information Management",
-  major: "Information Systems",
+  major: "Information Management",
   institution: "Bali State Polytechnic",
-  gpa: "3.92",
+  gpa: "3.95",
   maxGpa: "4.00",
   period: "2022 - 2025",
   location: "Bali, Indonesia",
@@ -48,7 +48,7 @@ const education = {
     "Management Information Systems",
     "System Analysis & Design",
   ],
-  summary: "Final-year Information System student with a GPA of 3.92/4.00. Developed a strong foundation in backend development, database design, and web technologies through academic projects and final year thesis. My academic journey has been complemented by hands-on industry experience, bridging theory with practical application."
+  summary: "Information Management graduate with a GPA of 3.95/4.00. Developed a strong foundation in backend development, database design, and web technologies through academic projects and final year thesis. My academic journey has been complemented by hands-on industry experience, bridging theory with practical application."
 }
 
 const experiences = [
@@ -93,6 +93,21 @@ const experiences = [
     ],
     technologies: ["Next.js", "Tailwind CSS", "Prisma ORM", "PostgreSQL", "Midtrans API", "Redis"]
   },
+  {
+    title: "Academic Data Assistant",
+    company: "Cendekia Harapan",
+    type: "Contract",
+    period: "Aug 2025 - Present",
+    location: "Bali, Indonesia",
+    description: "Expanded from a part-time data entry role to a full-day position managing academic data operations, cross-team coordination, and system oversight.",
+    achievements: [
+      "Managed student score entry and processing, ensuring Cambridge standards.",
+      "Ensured data consistency by monitoring and correcting data flow discrepancies.",
+      "Coordinated with academic teams to align marking standards and deadlines.",
+      "Designed and developed mock assessments to prepare students for assessment weeks."
+    ],
+    technologies: ["Data Entry", "Spreadsheets", "Attention to Detail", "Data Management", "Academic Administration", "Team Collaboration", "Problem Solving"]
+  },
 ]
 
 const certificates = [
@@ -113,51 +128,34 @@ const certificates = [
 ]
 
 function useExperienceTransforms(scrollYProgress: MotionValue<number>, length: number) {
-  // Create individual useTransform calls for each experience at top level
-  const progress0 = useTransform(scrollYProgress, [0 / length, 1 / length], [0, 1])
-  const progress1 = useTransform(scrollYProgress, [1 / length, 2 / length], [0, 1])
-  const progress2 = useTransform(scrollYProgress, [2 / length, 3 / length], [0, 1])
+  const ranges = Array.from({ length }, (_, i) => {
+    const start = i / (length + 1)
+    const end = (i + 0.8) / (length + 1)
+    return { start, end }
+  })
 
-  // Create filter transforms at top level
-  const filter0 = useTransform(
-    progress0,
-    [0, 0.3, 0.7, 1],
-    [
-      "grayscale(100%) brightness(0.4)",
-      "grayscale(80%) brightness(0.6)",
-      "grayscale(20%) brightness(0.9)",
-      "grayscale(0%) brightness(1)"
-    ]
-  )
-  const filter1 = useTransform(
-    progress1,
-    [0, 0.3, 0.7, 1],
-    [
-      "grayscale(100%) brightness(0.4)",
-      "grayscale(80%) brightness(0.6)",
-      "grayscale(20%) brightness(0.9)",
-      "grayscale(0%) brightness(1)"
-    ]
-  )
-  const filter2 = useTransform(
-    progress2,
-    [0, 0.3, 0.7, 1],
-    [
-      "grayscale(100%) brightness(0.4)",
-      "grayscale(80%) brightness(0.6)",
-      "grayscale(20%) brightness(0.9)",
-      "grayscale(0%) brightness(1)"
-    ]
+  const progressTransforms = ranges.map(({ start, end }) =>
+    useTransform(scrollYProgress, [start, end], [0, 1])
   )
 
-  // Create color transforms at top level
-  const color0 = useTransform(progress0, [0, 0.5, 1], ["#6b7280", "#9ca3af", "#60a5fa"])
-  const color1 = useTransform(progress1, [0, 0.5, 1], ["#6b7280", "#9ca3af", "#60a5fa"])
-  const color2 = useTransform(progress2, [0, 0.5, 1], ["#6b7280", "#9ca3af", "#60a5fa"])
+  // Create filter transforms dynamically
+  const itemFilters = progressTransforms.map(progress =>
+    useTransform(
+      progress,
+      [0, 0.3, 0.7, 1],
+      [
+        "grayscale(100%) brightness(0.4)",
+        "grayscale(80%) brightness(0.6)",
+        "grayscale(20%) brightness(0.9)",
+        "grayscale(0%) brightness(1)"
+      ]
+    )
+  )
 
-  // Return arrays with the exact number of items as experiences
-  const itemFilters = [filter0, filter1, filter2].slice(0, length)
-  const nodeColors = [color0, color1, color2].slice(0, length)
+  // Create color transforms dynamically
+  const nodeColors = progressTransforms.map(progress =>
+    useTransform(progress, [0, 0.5, 1], ["#6b7280", "#9ca3af", "#60a5fa"])
+  )
 
   return { itemFilters, nodeColors }
 }
@@ -170,7 +168,6 @@ const AboutDetails: React.FC = () => {
   })
   const timelineProgress = useTransform(scrollYProgress, [0, 1], ["0%", "100%"])
 
-  // <-- FIX: use the helper hook so useTransform calls are at top-level inside a hook
   const { itemFilters, nodeColors } = useExperienceTransforms(
     scrollYProgress,
     experiences.length
@@ -455,7 +452,7 @@ const AboutDetails: React.FC = () => {
               transition={{ duration: 0.3 }}
             >
               <Star className="w-8 h-8 sm:w-10 sm:h-10 text-yellow-400 mb-3 sm:mb-4" />
-              <h3 className="text-base sm:text-lg font-semibold text-white mb-2">Current GPA</h3>
+              <h3 className="text-base sm:text-lg font-semibold text-white mb-2">GPA</h3>
               <motion.div
                 className="text-3xl sm:text-4xl font-bold bg-gradient-to-r from-yellow-400 to-orange-400 bg-clip-text text-transparent"
                 whileHover={{ scale: 1.1 }}

@@ -363,8 +363,7 @@ const HeroSection = () => {
             className="text-sm sm:text-base md:text-lg text-gray-400 mb-6 sm:mb-8 md:mb-10 max-w-2xl mx-auto leading-relaxed px-4 sm:px-6"
             variants={itemVariants}
           >
-            I specialize in backend development with PHP, Laravel, and MySQL.
-            I&apos;m also expanding into frontend and web development to create seamless user experiences.
+            A developer with a strong foundation in software development, focused on building scalable systems and expanding into full-stack to create seamless digital solutions.
           </motion.p>
 
           {/* CTA Buttons */}

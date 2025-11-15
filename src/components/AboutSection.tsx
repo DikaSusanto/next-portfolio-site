@@ -311,7 +311,7 @@ const AboutSection: React.FC = () => {
               whileHover={{ color: "#e5e7eb" }}
               transition={{ duration: 0.3 }}
             >
-              Final-year Information System student at Bali State Polytechnic with a strong foundation in backend development and system design. Experienced in building and testing robust systems using PHP, Laravel, MySQL, and RESTful APIs, focusing on reliability and integration.
+              Graduate in Information Management from Bali State Polytechnic with a strong foundation in software development and a broad interest in technology. Experienced in building scalable systems and web applications using Laravel, Next.js, and RESTful APIs through academic, internship, and personal projects.
             </motion.p>
 
             <motion.p
@@ -320,7 +320,7 @@ const AboutSection: React.FC = () => {
               whileHover={{ color: "#e5e7eb" }}
               transition={{ duration: 0.3 }}
             >
-              Currently expanding into frontend and full-stack development to deliver seamless, user-friendly web experiences. I thrive in collaborative teams, enjoy solving problems, and am fluent in both English and Indonesian. Eager to contribute and grow as a versatile web developer.
+              Expanding my skillset into full-stack development to deliver seamless and user-friendly digital solutions. Strong in collaboration, critical thinking, and project execution—with fluency in both English and Indonesian—I am eager to contribute to dynamic technology teams and grow as a versatile developer.
             </motion.p>
 
             {/* Skills Belt Carousel - Responsive */}
@@ -465,7 +465,7 @@ const AboutSection: React.FC = () => {
               {[
                 { value: "1+", label: "Year Internship" },
                 { value: "9+", label: "Technologies Mastered" },
-                { value: "3.9+", label: "GPA Achievement" }
+                { value: "3.95+", label: "GPA Achievement" }
               ].map((stat, index) => (
                 <motion.div
                   key={index}
