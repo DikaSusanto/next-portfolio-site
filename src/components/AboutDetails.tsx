@@ -128,36 +128,62 @@ const certificates = [
 ]
 
 function useExperienceTransforms(scrollYProgress: MotionValue<number>, length: number) {
-  const ranges = Array.from({ length }, (_, i) => {
-    const start = i / (length + 1)
-    const end = (i + 0.8) / (length + 1)
-    return { start, end }
-  })
-
-  const progressTransforms = ranges.map(({ start, end }) =>
-    useTransform(scrollYProgress, [start, end], [0, 1])
-  )
-
-  // Create filter transforms dynamically
-  const itemFilters = progressTransforms.map(progress =>
-    useTransform(
-      progress,
-      [0, 0.3, 0.7, 1],
-      [
-        "grayscale(100%) brightness(0.4)",
-        "grayscale(80%) brightness(0.6)",
-        "grayscale(20%) brightness(0.9)",
-        "grayscale(0%) brightness(1)"
-      ]
-    )
-  )
-
-  // Create color transforms dynamically
-  const nodeColors = progressTransforms.map(progress =>
-    useTransform(progress, [0, 0.5, 1], ["#6b7280", "#9ca3af", "#60a5fa"])
-  )
-
-  return { itemFilters, nodeColors }
+  const transforms = React.useMemo(() => {
+    const itemFilters = []
+    const nodeColors = []
+    
+    for (let i = 0; i < length; i++) {
+      const start = i / (length + 1)
+      const end = (i + 0.8) / (length + 1)
+      
+      // Create progress transform
+      const progress = new MotionValue(0)
+      scrollYProgress.on('change', (v) => {
+        const normalized = Math.max(0, Math.min(1, (v - start) / (end - start)))
+        progress.set(normalized)
+      })
+      
+      // Create filter transform
+      const filter = new MotionValue("grayscale(100%) brightness(0.4)")
+      progress.on('change', (p) => {
+        if (p <= 0.3) {
+          const t = p / 0.3
+          filter.set(`grayscale(${100 - 20 * t}%) brightness(${0.4 + 0.2 * t})`)
+        } else if (p <= 0.7) {
+          const t = (p - 0.3) / 0.4
+          filter.set(`grayscale(${80 - 60 * t}%) brightness(${0.6 + 0.3 * t})`)
+        } else {
+          const t = (p - 0.7) / 0.3
+          filter.set(`grayscale(${20 - 20 * t}%) brightness(${0.9 + 0.1 * t})`)
+        }
+      })
+      
+      // Create color transform
+      const color = new MotionValue("#6b7280")
+      progress.on('change', (p) => {
+        if (p <= 0.5) {
+          const t = p / 0.5
+          const r = Math.round(107 + (156 - 107) * t)
+          const g = Math.round(114 + (163 - 114) * t)
+          const b = Math.round(128 + (175 - 128) * t)
+          color.set(`rgb(${r}, ${g}, ${b})`)
+        } else {
+          const t = (p - 0.5) / 0.5
+          const r = Math.round(156 + (96 - 156) * t)
+          const g = Math.round(163 + (165 - 163) * t)
+          const b = Math.round(175 + (250 - 175) * t)
+          color.set(`rgb(${r}, ${g}, ${b})`)
+        }
+      })
+      
+      itemFilters.push(filter)
+      nodeColors.push(color)
+    }
+    
+    return { itemFilters, nodeColors }
+  }, [scrollYProgress, length])
+  
+  return transforms
 }
 
 const AboutDetails: React.FC = () => {
